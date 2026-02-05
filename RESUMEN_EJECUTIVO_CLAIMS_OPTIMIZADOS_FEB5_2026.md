@@ -314,7 +314,7 @@ Enviar 7 documentos a patent attorney para utility filing antes de Feb 4, 2027.
 
 **Contacto Inventor:**  
 Rafael Alvarez Castro  
-kuteman3@gmail.com  
+kutemai@gmail.com  
 +52 998-651-2816  
 Querétaro, México
 

@@ -818,7 +818,7 @@ We can provide additional code if needed, but specification already enables all 
 ## 📞 INVENTOR CONTACT
 
 **Name:** Rafael Alvarez Castro  
-**Email:** kuteman3@gmail.com  
+**Email:** kutemai@gmail.com  
 **Phone:** +52 998-651-2816  
 **Location:** Querétaro, México  
 **Timezone:** CST (UTC-6)
