@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+myenv/
+venv/
+env/
+
+# System
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Large binary files
+*.wav
+*.mp3
+*.flac
+*.jpg
+*.png
+*.pdf
+*.zip
+*.tar.gz
+
+# Temporary
+*.tmp
+*.bak
+*.swp
+*.save
+*~
+
+# Sensitive
+*.key
+*.pem
+credentials*
+*secret*
