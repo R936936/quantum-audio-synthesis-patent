@@ -956,6 +956,138 @@ wherein said Bell states provide cryptographically verifiable proof of quantum e
 - **Authentication protection:** Claim 4 + claims 35-36, 45
 - **Future-proof protection:** Claim 5, 12(k), 40-42
 
+---
+
+## GROUP 13: HARDWARE-SPECIFIC IMPLEMENTATIONS
+
+### Claim 46: IBM Quantum Processor Implementation
+
+The method of Claim 1, wherein the quantum computer comprises an IBM Quantum superconducting processor having:
+- (a) at least 100 qubits arranged in heavy-hex topology;
+- (b) transmon qubit architecture operating at approximately 15 millikelvin;
+- (c) quantum gates with fidelity greater than 99.0%;
+- (d) specifically implemented on IBM ibm_fez backend with 156 qubits;
+- (e) quantum state readout using dispersive measurement;
+- (f) cross-resonance gates for CNOT implementation;
+- (g) DRAG pulse calibration for X and Y gates;
+
+wherein said superconducting processor is accessed via IBM Quantum Cloud API and wherein audio waveform generation exploits fast gate execution times (100-500 nanoseconds per gate) characteristic of superconducting qubit architectures.
+
+---
+
+### Claim 47: IonQ Trapped-Ion Implementation
+
+The method of Claim 1, wherein the quantum computer comprises an IonQ trapped-ion processor having:
+- (a) at least 20 Ytterbium-171 ions in linear Paul trap;
+- (b) all-to-all qubit connectivity enabling direct entanglement between any qubit pair;
+- (c) gate fidelity exceeding 99.5%, higher than superconducting architectures;
+- (d) longer coherence times (T1 > 10 seconds, T2 > 1 second);
+- (e) optical manipulation using 355 nm UV laser pulses;
+- (f) state readout via resonant fluorescence detection;
+
+wherein said trapped-ion processor produces audio synthesis with lower noise characteristics compared to superconducting processors due to superior gate fidelity and coherence times.
+
+---
+
+## GROUP 14: SYNTHESIS METHOD VARIANTS
+
+### Claim 48: Quantum Wavetable Synthesis
+
+The method of Claim 1, wherein the step of generating audio waveform (step h) comprises quantum wavetable synthesis:
+- (a) generating wavetable comprising 2048 samples per waveform cycle;
+- (b) each sample value derived from quantum probability distribution P(n) = |⟨n|ψ⟩|²;
+- (c) wavetable index modulated by second quantum state providing non-periodic variation;
+- (d) smooth interpolation between adjacent wavetable entries using cubic Hermite spline;
+- (e) wavetable morphing between multiple quantum-derived waveforms using cross-fade factor α(t);
+- (f) fundamental frequency range 20 Hz to 20,000 Hz;
+- (g) harmonic content controllable via quantum circuit parameters;
+
+wherein said wavetable synthesis enables real-time audio generation at sample rates of 44,100 Hz or 48,000 Hz by reading pre-computed quantum-derived wavetables, eliminating need for quantum computation during audio playback.
+
+---
+
+### Claim 49: Quantum FM Synthesis
+
+The method of Claim 1, wherein the step of generating audio waveform (step h) comprises quantum frequency modulation (FM) synthesis:
+- (a) carrier oscillator frequency f_c derived from first quantum probability distribution;
+- (b) modulator oscillator frequency f_m derived from second quantum probability distribution;
+- (c) modulation index I varying from 0 to 100, controlled by third quantum state;
+- (d) instantaneous frequency f(t) = f_c + I × sin(2π × f_m × t);
+- (e) ratio f_c : f_m selected from harmonic ratios including 1:1, 2:1, 3:2, 4:3, 8:5;
+- (f) quantum entanglement between carrier and modulator quantum states producing correlated frequency relationships impossible with classical FM synthesis;
+- (g) envelope shaping applied to modulation index using quantum envelope generator;
+
+wherein said quantum FM synthesis produces timbral evolution exhibiting quantum interference patterns in frequency spectrum.
+
+---
+
+### Claim 50: Quantum Audio File Format
+
+The method of Claim 1, further comprising encoding the audio file with quantum metadata:
+- (a) standard audio data encoded in uncompressed WAV format, 16-bit or 24-bit PCM;
+- (b) sample rate selected from: 44,100 Hz, 48,000 Hz, 88,200 Hz, or 96,000 Hz;
+- (c) metadata chunk embedded in WAV file containing:
+  - (i) quantum Job ID string (verification identifier);
+  - (ii) quantum backend identifier (e.g., "ibm_fez", "ionq_aria");
+  - (iii) timestamp of quantum execution in ISO 8601 format;
+  - (iv) number of qubits utilized;
+  - (v) number of measurement shots;
+  - (vi) quantum circuit depth;
+  - (vii) gate sequence summary;
+  - (viii) digital signature for authenticity verification;
+- (d) metadata parseable by standard WAV metadata readers;
+- (e) audio playback compatible with all standard media players;
+
+wherein said quantum metadata enables verification of quantum origin and provides cryptographic proof of authenticity while maintaining backward compatibility with existing audio software and hardware.
+
+---
+
+## CLAIM SUMMARY (UPDATED)
+
+**Total Claims:** 50 (Updated with hardware-specific and synthesis method claims)
+
+**Independent Claims:** 5
+- Claim 1: Method (quantum-classical hybrid audio synthesis)
+- Claim 2: System (modular architecture)
+- Claim 3: Computer Program Product (software implementation)
+- Claim 4: Verification Method (authenticity via Job ID)
+- Claim 5: Multi-Backend System (platform-agnostic)
+
+**Dependent Claims:** 45
+
+**Claim Groups:**
+- Group 1 (Claims 6-10): Circuit Design (Hadamard, CNOT, RZ/RY gates)
+- Group 2 (Claims 11-14): Quantum Backends (IBM, Google, IonQ, AWS, Azure, future)
+- Group 3 (Claims 15-17): Error Mitigation (readout correction, ZNE, outlier filtering)
+- Group 4 (Claims 18-23): Quantum-to-Audio Conversion (6 synthesis methods)
+- Group 5 (Claims 24-27): Real-Time Synthesis (wavetable oscillator, CV modulation)
+- Group 6 (Claims 28-29): File Format (.qwt structure with metadata)
+- Group 7 (Claims 30-32): Golden Ratio & Fibonacci (aesthetic proportions)
+- Group 8 (Claims 33-34): Multi-Method Synthesis (morphing engine)
+- Group 9 (Claims 35-36): Verification & Authentication (UI, digital watermark)
+- Group 10 (Claims 37-39): Modular Architecture (16-module system)
+- Group 11 (Claims 40-42): Cloud & Distributed (SaaS, marketplace)
+- Group 12 (Claims 43-45): Quantum Mechanical Phenomena
+- **Group 13 (Claims 46-47): Hardware-Specific Implementations** ⭐ NEW
+  - **Claim 46:** IBM Quantum superconducting processor (ibm_fez, 156 qubits)
+  - **Claim 47:** IonQ trapped-ion processor (higher fidelity, longer coherence)
+- **Group 14 (Claims 48-50): Synthesis Method Variants** ⭐ NEW
+  - **Claim 48:** Quantum wavetable synthesis (2048-sample tables)
+  - **Claim 49:** Quantum FM synthesis (modulation index 0-100)
+  - **Claim 50:** Quantum audio file format (WAV with quantum metadata)
+
+**Coverage Strategy:**
+- **Broadest protection:** Claims 1, 2, 3 (method, system, software)
+- **Quantum phenomena protection:** Claims 43-45 (interference, Born rule, Bell states)
+- **Hardware-specific protection:** Claims 46-47 (IBM, IonQ) ⭐ NEW
+- **Synthesis methods protection:** Claims 48-49 (wavetable, FM) ⭐ NEW
+- **File format protection:** Claim 50 (WAV with metadata) ⭐ NEW
+- **Method protection:** Claim 1 + dependent claims 6-10, 15-23, 30-34, 43-45, 48-49
+- **System protection:** Claim 2 + dependent claims 11-14, 24-29, 37-42, 46-47
+- **Software protection:** Claim 3
+- **Authentication protection:** Claim 4 + claims 35-36, 45, 50
+- **Future-proof protection:** Claim 5, 12(k), 40-42
+
 **Quantum Physics Coverage (Complete):** ✅
 - ✅ Superposition (Claims 1, 6, 43, 44)
 - ✅ Entanglement (Claims 1, 7, 14, 45)
