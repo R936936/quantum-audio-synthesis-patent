@@ -1,38 +1,34 @@
+# System files
+.DS_Store
+.Trash/
+.cache/
+.config/
+.bash_history
+.CFUserTextEncoding
+.copilot-cli-access-token
+
+# Application states
+Library/
+Pictures/
+Music/
+Movies/
+Desktop/
+Documents/
+Downloads/
+Applications/
+Public/
+
+# Agent progress
+.agente_progress.json
+.codeium/
+.codex/
+
 # Python
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
+*.pyc
+venv*/
 myenv/
-venv/
-env/
-
-# System
-.DS_Store
-.AppleDouble
-.LSOverride
-._*
-
-# Large binary files
-*.wav
-*.mp3
-*.flac
-*.jpg
-*.png
-*.pdf
-*.zip
-*.tar.gz
 
 # Temporary
 *.tmp
-*.bak
-*.swp
-*.save
-*~
-
-# Sensitive
-*.key
-*.pem
-credentials*
-*secret*
+*.log
