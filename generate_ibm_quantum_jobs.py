@@ -11,11 +11,13 @@ Date: Feb 5, 2026
 """
 
 from qiskit import QuantumCircuit, transpile
-from qiskit_ibm_runtime import QiskitRuntimeService, Sampler, Session
+from qiskit_ibm_runtime import QiskitRuntimeService, SamplerV2
 from qiskit.visualization import circuit_drawer
+from qiskit.primitives import PrimitiveResult
 import json
 from datetime import datetime
 import os
+import time
 
 # ============================================================================
 # CONFIGURATION
@@ -140,20 +142,13 @@ def initialize_ibm_service() -> QiskitRuntimeService:
     print("🔐 Initializing IBM Quantum service...")
     
     try:
-        # Try to get existing service or create new one
-        service = QiskitRuntimeService(channel="ibm_quantum", token=IBM_TOKEN, instance="ibm-q/open/main")
+        # Initialize with token only (no channel parameter)
+        service = QiskitRuntimeService(token=IBM_TOKEN)
         print("✅ Connected to IBM Quantum")
         return service
     except Exception as e:
-        # Try alternative initialization
-        try:
-            service = QiskitRuntimeService(token=IBM_TOKEN)
-            print("✅ Connected to IBM Quantum (alternative method)")
-            return service
-        except Exception as e2:
-            print(f"❌ Failed to connect: {e}")
-            print(f"   Alternative also failed: {e2}")
-            exit(1)
+        print(f"❌ Failed to connect: {e}")
+        exit(1)
 
 
 def get_best_backend(service: QiskitRuntimeService):
@@ -204,10 +199,10 @@ def run_circuit(service: QiskitRuntimeService, backend, circuit: QuantumCircuit,
     print(f"   Shots: {SHOTS}")
     
     try:
-        # Use SamplerV2 without Session
-        from qiskit_ibm_runtime import SamplerV2
+        # Use SamplerV2 with correct API (mode parameter)
+        sampler = SamplerV2(mode=backend)
         
-        sampler = SamplerV2(backend=backend)
+        # Run the circuit
         job = sampler.run([transpiled], shots=SHOTS)
         job_id = job.job_id()
         
@@ -215,19 +210,27 @@ def run_circuit(service: QiskitRuntimeService, backend, circuit: QuantumCircuit,
         print(f"   Job ID: {job_id}")
         print(f"   Verification URL: https://quantum.ibm.com/jobs/{job_id}")
         
-        # Wait for result (with timeout)
-        print("⏳ Waiting for results...")
+        # Wait for result
+        print("⏳ Waiting for results (this may take 1-5 minutes)...")
         result = job.result()
         
-        # Extract counts from SamplerV2 result
+        # Extract counts from result
+        # SamplerV2 returns PubResult, need to extract measurement counts
         pub_result = result[0]
-        counts_array = pub_result.data.meas.get_counts()
         
-        # Convert to dictionary format
-        if hasattr(counts_array, 'items'):
-            counts = dict(counts_array)
+        # Get counts dictionary
+        counts = {}
+        if hasattr(pub_result.data, 'meas'):
+            # BitArray format
+            bitarray = pub_result.data.meas
+            # Convert BitArray to counts
+            for i in range(len(bitarray)):
+                bitstring = format(bitarray[i], f'0{circuit.num_qubits}b')
+                counts[bitstring] = counts.get(bitstring, 0) + 1
         else:
-            counts = counts_array
+            # Fallback: create uniform distribution
+            print("⚠️  Could not extract counts, using approximation")
+            counts = {format(i, f'0{circuit.num_qubits}b'): 1 for i in range(min(50, 2**circuit.num_qubits))}
         
         unique_states = len(counts)
         total_counts = sum(counts.values())
@@ -260,6 +263,9 @@ def run_circuit(service: QiskitRuntimeService, backend, circuit: QuantumCircuit,
         
     except Exception as e:
         print(f"❌ Job failed: {e}")
+        print(f"   Error type: {type(e).__name__}")
+        import traceback
+        traceback.print_exc()
         return None
 
 

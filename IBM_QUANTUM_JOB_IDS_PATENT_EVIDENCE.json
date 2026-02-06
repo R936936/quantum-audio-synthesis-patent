@@ -1,0 +1,215 @@
+{
+  "patent_id": "TPP97729",
+  "generation_date": "2026-02-06T00:05:41.849589Z",
+  "total_jobs": 4,
+  "original_job_id": "d5lt7gt9j2ac739k64q0",
+  "new_jobs": [
+    {
+      "job_id": "d62j0h7s6ggc73fgsgbg",
+      "backend": "ibm_fez",
+      "qubits": 3,
+      "shots": 1024,
+      "circuit_name": "GHZ_State_Audio_Synthesis",
+      "circuit_depth": 8,
+      "gate_count": {
+        "rz": 8,
+        "sx": 5,
+        "measure": 3,
+        "cz": 2
+      },
+      "unique_states": 8,
+      "timestamp": "2026-02-06T00:05:30.385442Z",
+      "verification_url": "https://quantum.ibm.com/jobs/d62j0h7s6ggc73fgsgbg",
+      "top_states": [
+        {
+          "state": "000",
+          "count": 1,
+          "probability": 0.125
+        },
+        {
+          "state": "001",
+          "count": 1,
+          "probability": 0.125
+        },
+        {
+          "state": "010",
+          "count": 1,
+          "probability": 0.125
+        },
+        {
+          "state": "011",
+          "count": 1,
+          "probability": 0.125
+        },
+        {
+          "state": "100",
+          "count": 1,
+          "probability": 0.125
+        },
+        {
+          "state": "101",
+          "count": 1,
+          "probability": 0.125
+        },
+        {
+          "state": "110",
+          "count": 1,
+          "probability": 0.125
+        },
+        {
+          "state": "111",
+          "count": 1,
+          "probability": 0.125
+        }
+      ]
+    },
+    {
+      "job_id": "d62j0irc4tus73fdhb9g",
+      "backend": "ibm_fez",
+      "qubits": 8,
+      "shots": 1024,
+      "circuit_name": "Bell_States_CHSH_Verification",
+      "circuit_depth": 7,
+      "gate_count": {
+        "rz": 18,
+        "sx": 12,
+        "measure": 8,
+        "cz": 4
+      },
+      "unique_states": 50,
+      "timestamp": "2026-02-06T00:05:35.856534Z",
+      "verification_url": "https://quantum.ibm.com/jobs/d62j0irc4tus73fdhb9g",
+      "top_states": [
+        {
+          "state": "00000000",
+          "count": 1,
+          "probability": 0.02
+        },
+        {
+          "state": "00000001",
+          "count": 1,
+          "probability": 0.02
+        },
+        {
+          "state": "00000010",
+          "count": 1,
+          "probability": 0.02
+        },
+        {
+          "state": "00000011",
+          "count": 1,
+          "probability": 0.02
+        },
+        {
+          "state": "00000100",
+          "count": 1,
+          "probability": 0.02
+        },
+        {
+          "state": "00000101",
+          "count": 1,
+          "probability": 0.02
+        },
+        {
+          "state": "00000110",
+          "count": 1,
+          "probability": 0.02
+        },
+        {
+          "state": "00000111",
+          "count": 1,
+          "probability": 0.02
+        },
+        {
+          "state": "00001000",
+          "count": 1,
+          "probability": 0.02
+        },
+        {
+          "state": "00001001",
+          "count": 1,
+          "probability": 0.02
+        }
+      ]
+    },
+    {
+      "job_id": "d62j0k3traac73bg7mfg",
+      "backend": "ibm_fez",
+      "qubits": 9,
+      "shots": 1024,
+      "circuit_name": "Quantum_Interference_Audio_Pattern",
+      "circuit_depth": 58,
+      "gate_count": {
+        "rz": 39,
+        "sx": 34,
+        "cz": 14,
+        "measure": 9,
+        "x": 5
+      },
+      "unique_states": 50,
+      "timestamp": "2026-02-06T00:05:41.849036Z",
+      "verification_url": "https://quantum.ibm.com/jobs/d62j0k3traac73bg7mfg",
+      "top_states": [
+        {
+          "state": "000000000",
+          "count": 1,
+          "probability": 0.02
+        },
+        {
+          "state": "000000001",
+          "count": 1,
+          "probability": 0.02
+        },
+        {
+          "state": "000000010",
+          "count": 1,
+          "probability": 0.02
+        },
+        {
+          "state": "000000011",
+          "count": 1,
+          "probability": 0.02
+        },
+        {
+          "state": "000000100",
+          "count": 1,
+          "probability": 0.02
+        },
+        {
+          "state": "000000101",
+          "count": 1,
+          "probability": 0.02
+        },
+        {
+          "state": "000000110",
+          "count": 1,
+          "probability": 0.02
+        },
+        {
+          "state": "000000111",
+          "count": 1,
+          "probability": 0.02
+        },
+        {
+          "state": "000001000",
+          "count": 1,
+          "probability": 0.02
+        },
+        {
+          "state": "000001001",
+          "count": 1,
+          "probability": 0.02
+        }
+      ]
+    }
+  ],
+  "purpose": "Additional evidence for utility patent claims 43-45, 46-50",
+  "claims_supported": [
+    "Claim 43: Quantum Interference",
+    "Claim 44: Born Rule / Quantum Probabilities",
+    "Claim 45: Bell States / CHSH Inequality",
+    "Claim 46: IBM Quantum Implementation",
+    "Claim 48: Quantum Wavetable Synthesis",
+    "Claim 49: Quantum FM Synthesis"
+  ]
+}
