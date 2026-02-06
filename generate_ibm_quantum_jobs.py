@@ -140,12 +140,20 @@ def initialize_ibm_service() -> QiskitRuntimeService:
     print("🔐 Initializing IBM Quantum service...")
     
     try:
-        service = QiskitRuntimeService(channel="ibm_quantum", token=IBM_TOKEN)
+        # Try to get existing service or create new one
+        service = QiskitRuntimeService(channel="ibm_quantum", token=IBM_TOKEN, instance="ibm-q/open/main")
         print("✅ Connected to IBM Quantum")
         return service
     except Exception as e:
-        print(f"❌ Failed to connect: {e}")
-        exit(1)
+        # Try alternative initialization
+        try:
+            service = QiskitRuntimeService(token=IBM_TOKEN)
+            print("✅ Connected to IBM Quantum (alternative method)")
+            return service
+        except Exception as e2:
+            print(f"❌ Failed to connect: {e}")
+            print(f"   Alternative also failed: {e2}")
+            exit(1)
 
 
 def get_best_backend(service: QiskitRuntimeService):
@@ -196,52 +204,60 @@ def run_circuit(service: QiskitRuntimeService, backend, circuit: QuantumCircuit,
     print(f"   Shots: {SHOTS}")
     
     try:
-        with Session(service=service, backend=backend) as session:
-            sampler = Sampler(session=session)
-            job = sampler.run(transpiled, shots=SHOTS)
-            job_id = job.job_id()
-            
-            print(f"✅ Job submitted successfully!")
-            print(f"   Job ID: {job_id}")
-            print(f"   Verification URL: https://quantum.ibm.com/jobs/{job_id}")
-            
-            # Wait for result (with timeout)
-            print("⏳ Waiting for results...")
-            result = job.result()
-            
-            # Extract counts
-            pub_result = result[0]
-            counts = pub_result.data.meas.get_counts()
-            
-            unique_states = len(counts)
-            total_counts = sum(counts.values())
-            
-            print(f"✅ Job completed!")
-            print(f"   Unique states: {unique_states}")
-            print(f"   Total measurements: {total_counts}")
-            print(f"   Top 3 states:")
-            sorted_counts = sorted(counts.items(), key=lambda x: x[1], reverse=True)
-            for state, count in sorted_counts[:3]:
-                prob = count / total_counts * 100
-                print(f"     |{state}⟩: {count} ({prob:.2f}%)")
-            
-            return {
-                "job_id": job_id,
-                "backend": backend.name,
-                "qubits": circuit.num_qubits,
-                "shots": SHOTS,
-                "circuit_name": circuit.name,
-                "circuit_depth": transpiled.depth(),
-                "gate_count": dict(transpiled.count_ops()),
-                "unique_states": unique_states,
-                "timestamp": datetime.utcnow().isoformat() + "Z",
-                "verification_url": f"https://quantum.ibm.com/jobs/{job_id}",
-                "top_states": [
-                    {"state": state, "count": count, "probability": count/total_counts}
-                    for state, count in sorted_counts[:10]
-                ]
-            }
-            
+        # Use SamplerV2 without Session
+        from qiskit_ibm_runtime import SamplerV2
+        
+        sampler = SamplerV2(backend=backend)
+        job = sampler.run([transpiled], shots=SHOTS)
+        job_id = job.job_id()
+        
+        print(f"✅ Job submitted successfully!")
+        print(f"   Job ID: {job_id}")
+        print(f"   Verification URL: https://quantum.ibm.com/jobs/{job_id}")
+        
+        # Wait for result (with timeout)
+        print("⏳ Waiting for results...")
+        result = job.result()
+        
+        # Extract counts from SamplerV2 result
+        pub_result = result[0]
+        counts_array = pub_result.data.meas.get_counts()
+        
+        # Convert to dictionary format
+        if hasattr(counts_array, 'items'):
+            counts = dict(counts_array)
+        else:
+            counts = counts_array
+        
+        unique_states = len(counts)
+        total_counts = sum(counts.values())
+        
+        print(f"✅ Job completed!")
+        print(f"   Unique states: {unique_states}")
+        print(f"   Total measurements: {total_counts}")
+        print(f"   Top 3 states:")
+        sorted_counts = sorted(counts.items(), key=lambda x: x[1], reverse=True)
+        for state, count in sorted_counts[:3]:
+            prob = count / total_counts * 100
+            print(f"     |{state}⟩: {count} ({prob:.2f}%)")
+        
+        return {
+            "job_id": job_id,
+            "backend": backend.name,
+            "qubits": circuit.num_qubits,
+            "shots": SHOTS,
+            "circuit_name": circuit.name,
+            "circuit_depth": transpiled.depth(),
+            "gate_count": dict(transpiled.count_ops()),
+            "unique_states": unique_states,
+            "timestamp": datetime.utcnow().isoformat() + "Z",
+            "verification_url": f"https://quantum.ibm.com/jobs/{job_id}",
+            "top_states": [
+                {"state": state, "count": count, "probability": count/total_counts}
+                for state, count in sorted_counts[:10]
+            ]
+        }
+        
     except Exception as e:
         print(f"❌ Job failed: {e}")
         return None
